@@ -1,39 +1,32 @@
-# Application Builder
+# My Application Builder
 
-A modern file explorer application built with Angular and Electron, providing a native desktop experience for browsing and managing files.
+A modern desktop application template built with Angular 19 and Electron, providing a foundation for creating cross-platform desktop applications.
 
 ## Features
 
-- Modern and responsive user interface
-- File and directory browsing
-- File size display
-- Directory selection dialog
+- Modern and responsive user interface using Angular Material
 - Cross-platform support (Windows, macOS, Linux)
 - Secure file system access through Electron's IPC
-- File and directory navigation
-- File search functionality
-- File type icons
-- File size formatting
 - Multi-language support (English/Japanese)
-- Settings drawer
-- File opening with associated applications
-- Tile view with lazy loading of images
-- Context menu support
-- Drag and drop operations
-- Image thumbnail preview
+- Development tools integration (ESLint, Prettier)
+- TypeScript support
+- Hot reloading in development
+- Production build optimization
+- Icon generation support
+- Code formatting and linting
 
 ## Prerequisites
 
 - Node.js (v16 or later)
 - npm (v7 or later)
-- Angular CLI (v17 or later)
+- Angular CLI (v19 or later)
 
 ## Installation
 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd file-explorer
+cd my-application-builder
 ```
 
 2. Install dependencies:
@@ -52,7 +45,7 @@ npm run electron:serve
 This will:
 1. Start the Angular development server
 2. Launch the Electron application
-3. Open DevTools for debugging
+3. Enable hot reloading for development
 
 ## Building for Production
 
@@ -77,28 +70,52 @@ The build process generates the following files:
 ## Project Structure
 
 ```
-file-explorer/
+my-application-builder/
 ├── src/                    # Angular application source
 │   ├── app/               # Application components and services
 │   ├── assets/            # Static assets
 │   └── styles.css         # Global styles
 ├── electron/              # Electron main process files
 │   ├── main/             # Main process entry point
-│   │   └── main.js       # Main process initialization
 │   ├── services/         # Electron services
-│   │   ├── fileExplorerService.js  # File system operations
-│   │   ├── windowService.js        # Window management
-│   │   ├── fileSearchService.js    # File search functionality
-│   │   └── navigationService.js    # Navigation handling
 │   ├── handler/          # IPC handlers
-│   │   └── ipcHandlers.js # IPC communication handlers
 │   ├── preload/          # Preload scripts
-│   │   └── preload.js    # Preload script for IPC
 │   └── constant/         # Constants and configurations
-│       └── constants.js  # Application constants
-├── dist/                  # Angular build output
-└── release/              # Electron build output
+├── scripts/              # Build and utility scripts
+├── documents/            # Project documentation
+├── .angular/            # Angular build cache
+├── .vscode/             # VS Code configuration
+├── .idea/               # IntelliJ IDEA configuration
+├── dist/                # Angular build output
+└── release/             # Electron build output
 ```
+
+## Development Tools
+
+The project includes several development tools and configurations:
+
+### Code Quality
+- ESLint for code linting
+- Prettier for code formatting
+- TypeScript for type checking
+
+### Available Scripts
+- `npm run electron:serve` - Start development server
+- `npm run electron:build` - Build for production
+- `npm run generate-icons` - Generate application icons
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+
+## Configuration Files
+
+- `.eslintrc.json` - ESLint configuration
+- `.prettierrc` - Prettier configuration
+- `.editorconfig` - Editor configuration
+- `tsconfig.json` - TypeScript configuration
+- `angular.json` - Angular configuration
+- `package.json` - Project dependencies and scripts
 
 ## Security
 
