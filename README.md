@@ -117,6 +117,24 @@ The project includes several development tools and configurations:
 - `angular.json` - Angular configuration
 - `package.json` - Project dependencies and scripts
 
+## Dependencies
+
+### Core Dependencies
+- Angular 19.2.0
+- Electron 28.3.3
+- Angular Material 19.2.0
+- @ngx-translate/core 16.0.4
+- @ngx-translate/http-loader 16.0.1
+- RxJS 7.8.1
+- Sharp 0.33.5
+
+### Development Dependencies
+- TypeScript 5.5.0
+- ESLint 9.24.0
+- Prettier 3.5.3
+- Electron Builder 24.13.3
+- Angular CLI 19.2.0
+
 ## Security
 
 The application implements several security measures:
@@ -129,152 +147,6 @@ The application implements several security measures:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Class Diagram
-
-```mermaid
-classDiagram
-    class FileExplorerComponent {
-        +items: FileItem[]
-        +currentPath: string
-        +loading: boolean
-        +error: string | null
-        +searchQuery: string
-        +isSearching: boolean
-        +viewingFile: FileItem | null
-        +fileContent: string
-        +isDrawerOpen: boolean
-        +currentLang: string
-        +themeVariant: string
-        +devices: Device[]
-        +isListView: boolean
-        +viewMode: 'list' | 'tile' | 'column' | 'carousel'
-        +favorites: ( name: string; path: string; )s[]
-        -fileExplorerService: FileExplorerService
-        -translate: TranslateService
-        -fileThemeService: FileThemeService
-        -favoriteFolderService: FavoriteFolderService
-        +ngOnInit()
-        +ngOnDestroy()
-        +loadDirectory(path: string)
-        +goBack()
-        +goUp()
-        +goHome()
-        +onItemClick(item: FileItem)
-        +onSearch()
-    }
-
-    class ViewListComponent {
-        +loading: boolean
-        +items: FileItem[]
-        -fileExplorerService: FileExplorerService
-        -viewActionService: ViewActionService
-        +ngOnInit()
-        +ngOnDestroy()
-        +onItemClick(item: FileItem)
-        +onContextMenu(event: MouseEvent, item: FileItem)
-    }
-
-    class ViewTileComponent {
-        +items: FileItem[]
-        -fileExplorerService: FileExplorerService
-        -viewActionService: ViewActionService
-        +ngOnInit()
-        +ngOnDestroy()
-        +onItemClick(item: FileItem)
-        +onContextMenu(event: MouseEvent, item: FileItem)
-    }
-
-    class ViewColumnComponent {
-        +items: FileItem[]
-        -fileExplorerService: FileExplorerService
-        -viewActionService: ViewActionService
-        +ngOnInit()
-        +ngOnDestroy()
-        +onItemClick(item: FileItem)
-        +onContextMenu(event: MouseEvent, item: FileItem)
-    }
-
-    class ViewCarouselComponent {
-        +loading: boolean
-        +items: FileItem[]
-        -fileExplorerService: FileExplorerService
-        -viewActionService: ViewActionService
-        +ngOnInit()
-        +ngOnDestroy()
-        +onItemClick(item: FileItem)
-        +onContextMenu(event: MouseEvent, item: FileItem)
-    }
-
-    class FileExplorerService {
-        -electron: ElectronAPI
-        +getFileIcon(filename: string)
-        +isDirectory(path: string)
-        +canGoUp(path: string)
-        +isImageFile(filename: string)
-        +getFileContent(path: string)
-        +searchFiles(path: string, query: string)
-    }
-
-    class ViewActionService {
-        +favoriteAdd: EventEmitter
-        +itemCopy: EventEmitter
-        +itemPaste: EventEmitter
-        +itemRename: EventEmitter
-        +itemDelete: EventEmitter
-        +itemClick: EventEmitter
-        -contextMenuService: ContextMenuService
-        -dragOperationService: DragOperationService
-        +onDragStart(event: DragEvent, item: FileItem)
-        +onDragEnd(event: DragEvent)
-        +onContextMenu(event: MouseEvent, item: FileItem)
-    }
-
-    class ContextMenuService {
-        +favoriteAdd: EventEmitter
-        +itemCopy: EventEmitter
-        +itemPaste: EventEmitter
-        +itemRename: EventEmitter
-        +itemDelete: EventEmitter
-        +showContextMenu(event: MouseEvent, item: FileItem)
-    }
-
-    class DragOperationService {
-        +onDragStart(event: DragEvent, item: FileItem)
-        +onDragEnd(event: DragEvent)
-    }
-
-    class FileItem {
-        +name: string
-        +path: string
-        +isDirectory: boolean
-        +size: number
-        +modified: Date
-    }
-
-    FileExplorerComponent --> FileExplorerService
-    FileExplorerComponent --> ViewActionService
-    ViewListComponent --> FileExplorerService
-    ViewListComponent --> ViewActionService
-    ViewTileComponent --> FileExplorerService
-    ViewTileComponent --> ViewActionService
-    ViewColumnComponent --> FileExplorerService
-    ViewColumnComponent --> ViewActionService
-    ViewCarouselComponent --> FileExplorerService
-    ViewCarouselComponent --> ViewActionService
-    ViewActionService --> ContextMenuService
-    ViewActionService --> DragOperationService
-    FileExplorerService --> FileItem
-    ViewActionService --> FileItem
-```
-
-The class diagram above illustrates the main components and services of the application, along with their relationships. The core components are:
-
-- **FileExplorerComponent**: The main component that orchestrates the file explorer interface
-- **View Components**: Different view types (List, Tile, Column, Carousel) for displaying files
-- **Services**: Various services handling file operations, drag and drop, and context menu actions
-- **FileItem**: The model class representing files and directories
-
-The relationships show how components interact with services and how services depend on each other to provide the full functionality of the file explorer.
 
 ## Key Components
 
@@ -462,152 +334,6 @@ The application follows a well-defined data access sequence for the tile view:
    - ContextMenuService for menu management
    - DragOperationService for drag and drop
 
-### Tile View Data Access Sequence Diagram
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant ViewTileComponent
-    participant FileExplorerService
-    participant ContextMenuService
-    participant ViewActionService
-    participant TileItemComponent
-
-    User->>ViewTileComponent: Page Load
-    ViewTileComponent->>ViewTileComponent: ngOnInit()
-    ViewTileComponent->>ViewActionService: Register Event Listeners
-    ViewTileComponent->>ViewTileComponent: ngAfterViewInit()
-    ViewTileComponent->>ViewTileComponent: Setup Scroll Event Listener
-
-    User->>ViewTileComponent: Item Click
-    ViewTileComponent->>FileExplorerService: Check isImageFile()
-    alt Image File
-        FileExplorerService->>ViewTileComponent: true
-        ViewTileComponent->>FileExplorerService: openFileWithApp()
-    else Other File
-        FileExplorerService->>ViewTileComponent: false
-        ViewTileComponent->>ViewActionService: Emit itemClick Event
-    end
-
-    User->>ViewTileComponent: Drag Start
-    ViewTileComponent->>ViewActionService: onDragStart()
-    ViewActionService->>DragOperationService: Start Drag Operation
-
-    User->>ViewTileComponent: Context Menu
-    ViewTileComponent->>ViewActionService: onContextMenu()
-    ViewActionService->>ContextMenuService: Show Menu
-
-    User->>ViewTileComponent: Scroll
-    ViewTileComponent->>ViewTileComponent: onScroll()
-    ViewTileComponent->>ViewTileComponent: loadVisibleImages()
-    ViewTileComponent->>FileExplorerService: readImageFile()
-    FileExplorerService->>ViewTileComponent: Return Image Data
-    ViewTileComponent->>ViewTileComponent: Generate Image URL
-```
-
-### Tile View and Electron Layer Interaction Sequence
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant ViewTileComponent
-    participant FileExplorerService
-    participant ElectronAPI
-    participant Preload
-    participant IPC
-    participant Main
-    participant FileSystem
-
-    User->>ViewTileComponent: Page Load
-    ViewTileComponent->>FileExplorerService: Initialize
-    FileExplorerService->>ElectronAPI: readDirectory(currentPath)
-    ElectronAPI->>Preload: IPC Request
-    Preload->>IPC: Forward Request
-    IPC->>Main: Handle IPC
-    Main->>FileSystem: Read Directory
-    FileSystem-->>Main: Directory Contents
-    Main-->>IPC: Return Data
-    IPC-->>Preload: Forward Response
-    Preload-->>ElectronAPI: Return Data
-    ElectronAPI-->>FileExplorerService: Return FileItems
-    FileExplorerService-->>ViewTileComponent: Update Items
-
-    User->>ViewTileComponent: Scroll to Image
-    ViewTileComponent->>FileExplorerService: readImageFile(path)
-    FileExplorerService->>ElectronAPI: readImageFile(path)
-    ElectronAPI->>Preload: IPC Request
-    Preload->>IPC: Forward Request
-    IPC->>Main: Handle IPC
-    Main->>FileSystem: Read Image File
-    FileSystem-->>Main: Image Data
-    Main-->>IPC: Return Data
-    IPC-->>Preload: Forward Response
-    Preload-->>ElectronAPI: Return Data
-    ElectronAPI-->>FileExplorerService: Return Image Data
-    FileExplorerService-->>ViewTileComponent: Update Image
-
-    User->>ViewTileComponent: Drag Start
-    ViewTileComponent->>FileExplorerService: onDragStart(item)
-    FileExplorerService->>ElectronAPI: prepareDragData(item)
-    ElectronAPI->>Preload: IPC Request
-    Preload->>IPC: Forward Request
-    IPC->>Main: Handle IPC
-    Main-->>IPC: Return Drag Data
-    IPC-->>Preload: Forward Response
-    Preload-->>ElectronAPI: Return Data
-    ElectronAPI-->>FileExplorerService: Return Drag Data
-    FileExplorerService-->>ViewTileComponent: Start Drag Operation
-
-    User->>ViewTileComponent: Context Menu
-    ViewTileComponent->>FileExplorerService: getContextMenuData(item)
-    FileExplorerService->>ElectronAPI: getContextMenuData(item)
-    ElectronAPI->>Preload: IPC Request
-    Preload->>IPC: Forward Request
-    IPC->>Main: Handle IPC
-    Main-->>IPC: Return Menu Data
-    IPC-->>Preload: Forward Response
-    Preload-->>ElectronAPI: Return Data
-    ElectronAPI-->>FileExplorerService: Return Menu Data
-    FileExplorerService-->>ViewTileComponent: Show Context Menu
-```
-
-This sequence diagram illustrates the main interactions between the tile view and Electron layer:
-
-1. **Initialization and Directory Loading**
-   - Load directory contents on page load
-   - Access file system through Electron's IPC
-   - Return results to component
-
-2. **Image Loading**
-   - Request image data on scroll
-   - Load image file through Electron's IPC
-   - Return image data to component
-
-3. **Drag Operation**
-   - Prepare data on drag start
-   - Get drag data through Electron's IPC
-   - Start drag operation
-
-4. **Context Menu**
-   - Request data when showing context menu
-   - Get menu data through Electron's IPC
-   - Display context menu
-
-In each step, data follows this path:
-1. Angular Component → Service
-2. Service → ElectronAPI
-3. ElectronAPI → Preload Script
-4. Preload Script → IPC Handler
-5. IPC Handler → Main Process
-6. Main Process → File System
-7. Results return through the reverse path
 
 ## Screenshots
-![List View](./documents/2025-04-13_11-54-46.png)
-![Tile View](./documents/2025-04-13_11-55-06.png)
-![Column View](./documents/2025-04-13_11-55-25.png)
-![Carousel View](./documents/2025-04-13_15-15-38.png)
-![Drag&Drop](./documents/2025-04-13_16-38-50.png)
-![Favorite](./documents/2025-04-13_16-39-05.png)
-![Context Menu](./documents/2025-04-13_16-39-30.png)
-
