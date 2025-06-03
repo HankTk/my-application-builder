@@ -1,0 +1,38 @@
+/*
+@use '@angular/material' as mat;
+@use '@angular/material/core/theming/theming' as theming;
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Define the palettes
+$primary-palette: mat.define-palette(mat.$blue-palette);
+$accent-palette: mat.define-palette(mat.$amber-palette);
+$warn-palette: mat.define-palette(mat.$red-palette);
+
+// Create the theme object
+$dark-theme: theming.define-dark-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  )
+));
+
+// Define a light theme
+$light-theme: theming.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  )
+));
+
+// Apply the dark theme by default
+@include mat.all-component-themes($dark-theme);
+
+// Apply the light theme only when the `.light-theme` class is present
+.light-theme {
+  @include mat.all-component-colors($light-theme);
+} 
+*/

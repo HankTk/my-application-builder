@@ -1,0 +1,15 @@
+<div class="app-div">
+    <h3>
+        Operating system information
+    </h3>
+
+    <div *ngIf="error" class="error-message">
+        {{ error }}
+    </div>
+
+    <p>Hostname: {{hostname}}</p>
+    <p>Platform: {{platform}}</p>
+    <p>Arch: {{arch}}</p>
+    <p>Release: {{release}}</p>  
+</div>
+      
