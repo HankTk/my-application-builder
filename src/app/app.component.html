@@ -6,13 +6,32 @@
     <h1 class="example-app-name">{{ title }}</h1>
     <!-- This fills the remaining space of the current row -->
     <span class="fill-remaining-space"></span>
-    <button mat-icon-button (click)="clickDevTools()">
-      <mat-icon>more_vert</mat-icon>
+    <button mat-icon-button (click)="settingsSidenav.toggle()">
+      <mat-icon>settings</mat-icon>
     </button>
   </mat-toolbar>
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="0">
     <mat-sidenav #sidenav mode="over" fixedTopGap="56">
       <app-navlist (sidenavClose)="sidenav.close()"></app-navlist>
+    </mat-sidenav>
+    <mat-sidenav #settingsSidenav mode="over" position="end" fixedTopGap="56">
+      <div class="settings-drawer">
+        <h2>Settings</h2>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>palette</mat-icon>
+            <span matListItemTitle>Theme</span>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>language</mat-icon>
+            <span matListItemTitle>Language</span>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>notifications</mat-icon>
+            <span matListItemTitle>Notifications</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
     </mat-sidenav>
     <mat-sidenav-content>
       <router-outlet></router-outlet>

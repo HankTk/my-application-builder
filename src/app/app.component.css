@@ -35,3 +35,47 @@
        Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
   }
+
+  /* Header button styles */
+  .example-toolbar button[mat-icon-button] {
+    margin: 0 4px;
+    color: white;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  .example-toolbar button[mat-icon-button]:hover,
+  .example-toolbar button[mat-icon-button]:focus,
+  .example-toolbar button[mat-icon-button]:active {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  .example-toolbar mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+  }
+
+  /* Settings drawer styles */
+  .settings-drawer {
+    padding: 16px;
+    width: 300px;
+  }
+
+  .settings-drawer h2 {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .settings-drawer mat-list-item {
+    height: 48px;
+  }
+
+  .settings-drawer mat-icon {
+    margin-right: 16px;
+  }
