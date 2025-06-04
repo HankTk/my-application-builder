@@ -1,5 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { IpcService } from '../../services/ipc.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,14 +8,10 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [CommonModule]
 })
-export class Component1Component implements OnInit 
+export class Component1Component 
 {
     error = '';
 
-    constructor(private ipcService: IpcService, private ngZone: NgZone) 
+    constructor() 
     { }
-
-    ngOnInit() 
-    {
-    }
 }

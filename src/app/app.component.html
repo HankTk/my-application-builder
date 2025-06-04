@@ -1,14 +1,40 @@
 <div class="example-container">
-  <app-header [title]="title" [sidenav]="sidenav" [settingsSidenav]="settingsSidenav"></app-header>
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="0">
-    <mat-sidenav #sidenav mode="over" fixedTopGap="56" [fixedInViewport]="true" [fixedBottomGap]="0">
-      <app-navlist (sidenavClose)="sidenav.close()"></app-navlist>
+
+  <app-header 
+    [title]="title" 
+    [sidenav]="sidenav" 
+    [settings]="settings">
+  </app-header>
+
+  <mat-sidenav-container 
+    class="example-sidenav-container" 
+    [style.marginTop.px]="0">
+    
+    <mat-sidenav 
+      #sidenav 
+      mode="over" 
+      fixedTopGap="56" 
+      [fixedInViewport]="true" 
+      [fixedBottomGap]="0">
+      <app-navlist
+       (sidenavClose)="sidenav.close()">
+      </app-navlist>
     </mat-sidenav>
-    <mat-sidenav #settingsSidenav mode="over" position="end" fixedTopGap="56" [fixedInViewport]="true" [fixedBottomGap]="0">
+
+    <mat-sidenav 
+      #settings
+      mode="over" 
+      position="end" 
+      fixedTopGap="56" 
+      [fixedInViewport]="true" 
+      [fixedBottomGap]="0">
       <app-settings></app-settings>
     </mat-sidenav>
+
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
+
   </mat-sidenav-container>
+
 </div>

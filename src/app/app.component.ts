@@ -27,7 +27,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 })
 export class AppComponent 
 {
-    title = 'My Electron Desktop';
+
+    title = 'My Application';
 
     constructor(private ipcService: IpcService) 
     {
@@ -37,4 +38,5 @@ export class AppComponent
     {
         this.ipcService.openDevTools();
     }
+
 }

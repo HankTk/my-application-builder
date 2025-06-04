@@ -13,7 +13,9 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class HeaderComponent 
 {
+
   @Input() title: string = '';
   @Input() sidenav!: MatSidenav;
-  @Input() settingsSidenav!: MatSidenav;
+  @Input() settings!: MatSidenav;
+
 } 

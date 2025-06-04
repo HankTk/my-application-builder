@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,13 +8,8 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [CommonModule]
 })
-export class Component2Component implements OnInit 
+export class Component2Component 
 {
-
     constructor() 
     { }
-
-    ngOnInit() 
-    {
-    }
 }
