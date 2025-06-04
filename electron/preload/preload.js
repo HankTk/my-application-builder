@@ -2,6 +2,16 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
+contextBridge.exposeInMainWorld('api', {
+  electronIpcSend: (channel, ...args) => ipcRenderer.send(channel, ...args),
+  electronIpcSendSync: (channel, ...args) => ipcRenderer.sendSync(channel, ...args),
+  electronIpcOn: (channel, listener) => ipcRenderer.on(channel, listener),
+  electronIpcOnce: (channel, listener) => ipcRenderer.once(channel, listener),
+  electronIpcRemoveListener: (channel, listener) => ipcRenderer.removeListener(channel, listener),
+  electronIpcRemoveAllListeners: (channel) => ipcRenderer.removeAllListeners(channel)
+});
+
+// Keep the existing electronAPI for other functionality
 contextBridge.exposeInMainWorld('electronAPI', {
   readDirectory: (path) => ipcRenderer.invoke('read-directory', path),
   selectDirectory: () => ipcRenderer.invoke('select-directory'),

@@ -2,6 +2,7 @@ const { ipcMain, dialog } = require('electron');
 const fileService = require('../services/fileExplorerService');
 const navigationService = require('../services/navigationService');
 const { app } = require('electron');
+const os = require('os');
 
 function setupIpcHandlers() {
 
@@ -102,6 +103,18 @@ function setupIpcHandlers() {
 
   ipcMain.handle('read-raw-file', async (event, filePath) => {
     return await fileService.readRawFile(filePath);
+  });
+
+  // Add system info handler
+  ipcMain.on('request-systeminfo', (event) => {
+    const systemInfo = {
+      platform: process.platform,
+      arch: process.arch,
+      version: process.getSystemVersion(),
+      totalMemory: os.totalmem(),
+      freeMemory: os.freemem()
+    };
+    event.reply('systeminfo', JSON.stringify(systemInfo));
   });
 
 }
