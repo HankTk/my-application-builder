@@ -18,7 +18,31 @@ declare global {
             requestSystemInfo: () => void;
             onSystemInfo: (callback: (data: string) => void) => void;
             toggleDevTools: () => void;
-        }
+        };
+        electronAPI: {
+            readDirectory: (path: string) => Promise<any>;
+            selectDirectory: () => Promise<string>;
+            openFile: (path: string) => Promise<void>;
+            readFileContent: (path: string) => Promise<string>;
+            getCurrentDirectory: () => Promise<string>;
+            getHomeDirectory: () => Promise<string>;
+            searchFiles: (directory: string, query: string) => Promise<any[]>;
+            canGoBack: () => Promise<boolean>;
+            goBack: () => Promise<string>;
+            canGoUp: (path: string) => Promise<boolean>;
+            getParentDirectory: (path: string) => Promise<string>;
+            checkPathExists: (path: string) => Promise<boolean>;
+            isDirectory: (path: string) => Promise<boolean>;
+            openFileWithApp: (path: string) => Promise<void>;
+            getPlatform: () => string;
+            copyItem: (sourcePath: string) => Promise<Buffer>;
+            pasteItem: (sourcePath: string, destinationPath: string) => Promise<void>;
+            renameItem: (oldPath: string, newPath: string) => Promise<void>;
+            deleteItem: (path: string) => Promise<void>;
+            readImageFile: (path: string, highQuality: boolean) => Promise<Buffer>;
+            readRawFile: (path: string) => Promise<Buffer>;
+            showAboutDialog: () => Promise<void>;
+        };
     }
 }
 

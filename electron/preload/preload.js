@@ -33,5 +33,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   renameItem: (oldPath, newPath) => ipcRenderer.invoke('rename-item', oldPath, newPath),
   deleteItem: (path) => ipcRenderer.invoke('delete-item', path),
   readImageFile: (path, highQuality) => ipcRenderer.invoke('read-image-file', path, highQuality),
-  readRawFile: (path) => ipcRenderer.invoke('read-raw-file', path)
+  readRawFile: (path) => ipcRenderer.invoke('read-raw-file', path),
+  showAboutDialog: () => ipcRenderer.invoke('show-about-dialog')
 }); 
