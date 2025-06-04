@@ -1,0 +1,15 @@
+.example-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.example-app-name {
+  margin-left: 8px;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+} 

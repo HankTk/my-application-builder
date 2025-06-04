@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
     selector: 'app-navlist',
     templateUrl: './navlist.component.html',
-    styleUrls: ['./navlist.component.css'],
+    styleUrls: ['./navlist.component.scss'],
     standalone: true,
     imports: [
         CommonModule,

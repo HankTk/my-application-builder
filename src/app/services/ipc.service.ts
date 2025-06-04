@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DtoSystemInfo } from './models/systeminfo';
+import { DtoSystemInfo } from '../models/systeminfo';
 import { Observable } from 'rxjs';
 import { IpcRendererEvent } from 'electron';
 

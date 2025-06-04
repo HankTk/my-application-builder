@@ -33,7 +33,6 @@ class WindowService {
         this.mainWindow.loadURL(WINDOW.DEV_SERVER_URL).catch(err => {
           console.error('Failed to load URL:', err);
         });
-        this.mainWindow.webContents.openDevTools();
       }, WINDOW.DEV_SERVER_TIMEOUT);
     } else {
       console.log('Production mode: Loading from', WINDOW.PROD_INDEX_PATH);
